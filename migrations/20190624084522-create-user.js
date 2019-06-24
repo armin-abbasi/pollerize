@@ -33,7 +33,7 @@ module.exports = {
       },
       active: {
         type: Sequelize.BOOLEAN,
-        defaultValue: Sequelize.TRUE
+        defaultValue: true
       },
       createdAt: {
         allowNull: false,
