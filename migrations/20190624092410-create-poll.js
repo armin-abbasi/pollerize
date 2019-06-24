@@ -9,12 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       question: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       totalCount: {
+        defalutValue: 0,
         type: Sequelize.INTEGER
       },
       expiresAt: {
