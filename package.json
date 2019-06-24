@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "express": "^4.17.1",
+    "sequelize": "^5.8.12",
     "validator": "^11.0.0"
   },
   "devDependencies": {},
@@ -20,7 +21,7 @@
     "polling",
     "nodejs",
     "express",
-    "mongo",
+    "mysql",
     "open-source"
   ],
   "author": "Armin Abbasi <armin.abbasi@hotmail.com>",
