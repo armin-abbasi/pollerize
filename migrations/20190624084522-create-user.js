@@ -26,7 +26,7 @@ module.exports = {
       },
       dob: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       location: {
         type: Sequelize.STRING
