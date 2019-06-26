@@ -7,6 +7,12 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Vote.associate = function(models) {
     Vote.belongsTo(models.Poll);
+    
+    Vote.belongsToMany(models.User, {
+      through: models.UserVote,
+      foreignKey: 'user_id',
+      as: 'voters'
+    });
   };
   return Vote;
 };
