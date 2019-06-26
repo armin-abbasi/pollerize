@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
   Poll.associate = function(models) {
     Poll.hasMany(models.Vote, {
       foreignKey: 'pollId'
-    })
+    });
+    Poll.belongsTo(models.User);
   };
   return Poll;
 };

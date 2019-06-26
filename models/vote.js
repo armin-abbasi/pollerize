@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     count: DataTypes.INTEGER
   }, {});
   Vote.associate = function(models) {
-    
+    Vote.belongsTo(models.Poll);
   };
   return Vote;
 };
