@@ -7,7 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     expiresAt: DataTypes.DATE
   }, {});
   Poll.associate = function(models) {
-    // associations can be defined here
+    Poll.hasMany(models.Vote, {
+      foreignKey: 'pollId'
+    })
   };
   return Poll;
 };
