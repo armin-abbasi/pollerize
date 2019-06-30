@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const pollService = require('./services/polls');
-let response = {code: 0, message: 'operation completed successfully.', data: []};
+const pollService = require('../services/polls');
+let response = {code: 0, message: 'completed successfully', data: []};
 
 const handleErrors = (err, response) => {
     response.code = -1;
@@ -13,7 +13,7 @@ const handleErrors = (err, response) => {
 router.get('/polls', (req, res) => {
     pollService
     .getAll()
-    .then(poll => {
+    .then(polls => {
         response.data = polls;
 
         return res.json(response);
