@@ -1,8 +1,15 @@
 const router = require('express').Router();
-const models = require('./models');
+const pollService = require('./services/polls');
 
-router.get('/', (req, res) => {
-    models.User.findAll({include: [{model: models.Poll}]}).then(users => res.send(users));
+router.get('/polls', (req, res) => {
+    pollService
+    .getAll()
+    .then(polls => {
+        res.send(polls);
+    })
+    .catch(err => {
+        console.log(err);
+    });
 });
 
 module.exports = router;
