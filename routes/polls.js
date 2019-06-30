@@ -10,7 +10,7 @@ const handleErrors = (err, response) => {
     return response;
 };
 
-router.get('/polls', (req, res) => {
+router.get('/', (req, res) => {
     pollService
     .getAll()
     .then(polls => {
