@@ -1,8 +1,8 @@
 const models = require('../models');
 const Poll = models.Poll;
 
-const getAll = () => {
-    return Poll.findAll();
-};
+class PollService {
 
-module.exports = {getAll};
+}
+
+module.exports = {PollService};
