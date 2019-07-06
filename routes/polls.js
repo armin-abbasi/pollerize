@@ -3,7 +3,12 @@ const pollService = require('../services/polls');
 
 router.get('/', (req, res) => {
     pollService
-    .getAll(req, res);
+        .getAll(req, res);
+});
+
+router.get('/:id', (req, res) => {
+    pollService
+        .getById(req, res);
 });
 
 module.exports = router;

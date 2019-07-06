@@ -23,4 +23,15 @@ const getAll = (req, res) => {
         });
 };
 
-module.exports = {getAll};
+const getById = (req, res) => {
+    Poll
+        .findByPk(req.params.id)
+        .then(poll => {
+            response.data = poll;
+            return res.json(response);
+        }).catch(err => {
+            return res.json(handleErrors(err, response));
+        });
+};
+
+module.exports = {getAll, getById};
