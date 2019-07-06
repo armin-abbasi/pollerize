@@ -1,8 +1,8 @@
 const models = require('../models');
 const Poll = models.Poll;
 
-// Handling responses
 let response = {code: 0, message: 'completed successfully', data: []};
+// Handling error responses
 const handleErrors = (err, response) => {
     response.code = -1;
     response.data = [];
@@ -16,11 +16,11 @@ const getAll = (req, res) => {
         .findAll()
         .then(polls => {
             response.data = polls;
-            res.json(response).end();
+            return res.json(response);
         })
-        .catch((err => {
-            handleErrors(err, response);
-        }));
+        .catch(err => {
+            return res.json(handleErrors(err, response));
+        });
 };
 
 module.exports = {getAll};
