@@ -1,7 +1,7 @@
 const models = require('../models');
 const Poll = models.Poll;
 
-let response = {code: 0, message: 'completed successfully', data: []};
+let response = {code: 0, message: 'success', data: []};
 // Handling error responses
 const handleErrors = (err, response) => {
     response.code = -1;
