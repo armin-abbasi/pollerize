@@ -11,4 +11,9 @@ router.get('/:id', (req, res) => {
         .getById(req, res);
 });
 
+router.delete('/:id', (req, res) => {
+    pollService
+        .delete(req, res);
+});
+
 module.exports = router;
