@@ -13,7 +13,7 @@ router.get('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     pollService
-        .delete(req, res);
+        .deleteById(req, res);
 });
 
 module.exports = router;

@@ -15,8 +15,10 @@ const getAll = (req, res) => {
     Poll
         .findAll()
         .then(polls => {
-            response.data = polls;
-            return res.json(response);
+            let success = response;
+
+            success.data = polls;
+            return res.json(success);
         })
         .catch(err => {
             return res.json(handleErrors(err, response));
@@ -27,11 +29,32 @@ const getById = (req, res) => {
     Poll
         .findByPk(req.params.id)
         .then(poll => {
-            response.data = poll;
-            return res.json(response);
-        }).catch(err => {
+            let success = response;
+
+            success.data = poll;
+            return res.json(success);
+        })
+        .catch(err => {
             return res.json(handleErrors(err, response));
         });
 };
 
-module.exports = {getAll, getById};
+const deleteById = (req, res) => {
+    Poll
+        .destroy({where: {id: req.params.id}})
+        .then(result => {
+            let success = response;
+
+            if (result === 0) {
+                success.message = 'item not found';
+                success.code = -2;
+            }
+
+            return res.json(success);
+        })
+        .catch(err => {
+            return res.json(handleErrors(err, response));
+        });
+};
+
+module.exports = {getAll, getById, deleteById};
