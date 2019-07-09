@@ -1,6 +1,11 @@
 const router = require('express').Router();
 const pollService = require('../services/polls');
 
+router.post('/', (req, res) => {
+    pollService
+        .create(req, res);
+});
+
 router.get('/', (req, res) => {
     pollService
         .getAll(req, res);

@@ -1,8 +1,20 @@
 // Resolve database model
 const models = require('../models');
 const Poll = models.Poll;
+
 // Get response module
 const Responser = require('../utils/responser');
+
+const create = (req, res) => {
+    Poll
+        .create(req.body)
+        .then(result => {
+            Responser.create(res, 0, result);
+        })
+        .catch(err => {
+            Responser.create(res, -1, err);
+        });
+};
 
 const getAll = (req, res) => {
     Poll
@@ -43,4 +55,4 @@ const deleteById = (req, res) => {
         });
 };
 
-module.exports = {getAll, getById, deleteById};
+module.exports = {getAll, getById, deleteById, create};
