@@ -1,27 +1,17 @@
+// Resolve database model
 const models = require('../models');
 const Poll = models.Poll;
-
-let response = {code: 0, message: 'success', data: []};
-// Handling error responses
-const handleErrors = (err, response) => {
-    response.code = -1;
-    response.data = [];
-    response.message = (process.env.DEBUG === true) ? err.message : 'operation failed!';
-
-    return response;
-};
+// Get response module
+const Responser = require('../utils/responser');
 
 const getAll = (req, res) => {
     Poll
         .findAll()
         .then(polls => {
-            let success = response;
-
-            success.data = polls;
-            return res.json(success);
+            Responser.create(res, 'success', 0, polls);
         })
         .catch(err => {
-            return res.json(handleErrors(err, response));
+            Responser.create(res, 'error', -1, err);
         });
 };
 
@@ -29,13 +19,10 @@ const getById = (req, res) => {
     Poll
         .findByPk(req.params.id)
         .then(poll => {
-            let success = response;
-
-            success.data = poll;
-            return res.json(success);
+            Responser.create(res, 'success', 0, poll);
         })
         .catch(err => {
-            return res.json(handleErrors(err, response));
+            Responser.create(res, 'error', -1, err);
         });
 };
 
@@ -43,17 +30,16 @@ const deleteById = (req, res) => {
     Poll
         .destroy({where: {id: req.params.id}})
         .then(result => {
-            let success = response;
+            let responseCode = 0;
 
             if (result === 0) {
-                success.message = 'item not found';
-                success.code = -2;
+                responseCode = -2;
             }
 
-            return res.json(success);
+            Responser.create(res, 'success', responseCode, []);
         })
         .catch(err => {
-            return res.json(handleErrors(err, response));
+            Responser.create(res, 'error', -1, err);
         });
 };
 
