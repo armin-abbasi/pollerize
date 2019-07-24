@@ -2,12 +2,16 @@ const errorMessageMap = {
     '0' : 'success',
     '-1': 'failed',
     '-2': 'not found',
-    '-3': 'unauthorized'
+    '-3': 'not authentciated',
+    '-4': 'unauthorized',
+    '-5': 'username or password are incorrect'
 };
 
 const errorStatusCode = {
     '-2': 404,
-    '-3': 403
+    '-3': 401,
+    '-4': 403,
+    '-5': 401
 };
 
 module.exports.create = (res, code, data) => {
@@ -28,5 +32,5 @@ module.exports.create = (res, code, data) => {
         'data': resData
     };
 
-    return res.status(resStatus).json(responseObject);
+    res.status(resStatus).json(responseObject).end();
 };
