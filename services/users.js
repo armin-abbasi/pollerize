@@ -1,13 +1,15 @@
-// Resolve database model
+const bcrypt = require('bcrypt');
 const models = require('../models');
 const User = models.User;
-
-// Get response module
 const Responser = require('../utils/responser');
 
-const create = (req, res) => {
+const create = async(req, res) => {
+    // Hash the entered password
+    let input = req.body;
+    input.password = await bcrypt.hash(input.password, 10);
+
     User
-        .create(req.body)
+        .create(input)
         .then(result => {
             Responser.create(res, 0, result);
         })
