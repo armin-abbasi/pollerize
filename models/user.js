@@ -1,4 +1,7 @@
 'use strict';
+
+const bcrypt = require('bcrypt');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     name: DataTypes.STRING,
@@ -14,5 +17,16 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId'
     })
   };
+
+  // generate hash for user model
+  User.generateHash = (password) => {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+  };
+
+  // check if the entered password is valid
+  User.validPassword = (password) => {
+    return bcrypt.compareSync(password, this.password);
+  };
+
   return User;
 };

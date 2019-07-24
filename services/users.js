@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const models = require('../models');
 const User = models.User;
 const Responser = require('../utils/responser');
@@ -6,7 +5,7 @@ const Responser = require('../utils/responser');
 const create = (req, res) => {
     // Hash the entered password
     let input = req.body;
-    input.password = bcrypt.hashSync(input.password, 10);
+    input.password = User.generateHash(input.password);
 
     User
         .create(input)
