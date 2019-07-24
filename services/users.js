@@ -3,10 +3,10 @@ const models = require('../models');
 const User = models.User;
 const Responser = require('../utils/responser');
 
-const create = async(req, res) => {
+const create = (req, res) => {
     // Hash the entered password
     let input = req.body;
-    input.password = await bcrypt.hash(input.password, 10);
+    input.password = bcrypt.hashSync(input.password, 10);
 
     User
         .create(input)
