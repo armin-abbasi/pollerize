@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     location: DataTypes.STRING,
     active: DataTypes.BOOLEAN
   }, {});
+
   User.associate = function(models) {
     User.hasMany(models.Poll, {
       foreignKey: 'userId'
@@ -24,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   // check if the entered password is valid
-  User.validPassword = (password) => {
+  User.prototype.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
   };
 
