@@ -9,7 +9,7 @@ server.use(bodyParser.json({ type: 'application/json' }));
 
 server.use('/polls', pollRoutes);
 
-server.use('/users', userRoutes);
+server.use('/user', userRoutes);
 
 server.listen(port, () => {
     console.log(`app listening to port ${port}`);
