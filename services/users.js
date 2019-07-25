@@ -71,4 +71,4 @@ const deleteById = (req, res) => {
         });
 };
 
-module.exports = {getAll, getById, deleteById, create};
+module.exports = {getAll, getById, deleteById, create, update};
