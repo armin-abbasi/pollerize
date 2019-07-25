@@ -17,6 +17,11 @@ router.get('/:id', (req, res) => {
         .getById(req, res);
 });
 
+router.put('/:id', (req, res) => {
+    userService
+        .update(req, res);
+});
+
 router.delete('/:id', (req, res) => {
     userService
         .deleteById(req, res);

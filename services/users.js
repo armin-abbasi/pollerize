@@ -39,6 +39,21 @@ const getById = (req, res) => {
         });
 };
 
+const update = (req, res) => {
+    User
+        .findByPk(req.params.id)
+        .then(User => {
+            User.update(req.body)
+                .then(updatedItem => {
+                    Responser.create(res, 0, updatedItem);
+                })
+                .catch(err => Responser.create(res, -1, err));
+        })
+        .catch(err => {
+            Responser.create(res, -1, err);
+        });
+};
+
 const deleteById = (req, res) => {
     User
         .destroy({where: {id: req.params.id}})
