@@ -13,5 +13,6 @@ services:
     image: mysql:5.7
     environment:
       - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=pollerize
     ports:
       - '3307:3306'
