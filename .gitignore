@@ -2,4 +2,5 @@
 .vscode/
 node_modules
 config/app.json
+config/config.json
 test.js
