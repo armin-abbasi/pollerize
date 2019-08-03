@@ -1,5 +1,6 @@
 const errorMessageMap = {
-    '0' : 'success',
+    '0': 'success',
+    '3': 'user logged in successfully',
     '-1': 'failed',
     '-2': 'not found',
     '-3': 'not authentciated',
