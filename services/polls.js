@@ -9,10 +9,10 @@ const create = (req, res) => {
     Poll
         .create(req.body)
         .then(result => {
-            Responser.create(res, 0, result);
+            return Responser.create(res, 0, result);
         })
         .catch(err => {
-            Responser.create(res, -1, err);
+            return Responser.create(res, -1, err);
         });
 };
 
@@ -20,10 +20,10 @@ const getAll = (req, res) => {
     Poll
         .findAll()
         .then(polls => {
-            Responser.create(res, 0, polls);
+            return Responser.create(res, 0, polls);
         })
         .catch(err => {
-            Responser.create(res, -1, err);
+            return Responser.create(res, -1, err);
         });
 };
 
@@ -31,10 +31,10 @@ const getById = (req, res) => {
     Poll
         .findByPk(req.params.id)
         .then(poll => {
-            Responser.create(res, 0, poll);
+            return Responser.create(res, 0, poll);
         })
         .catch(err => {
-            Responser.create(res, -1, err);
+            return Responser.create(res, -1, err);
         });
 };
 
@@ -48,10 +48,10 @@ const deleteById = (req, res) => {
                 responseCode = -2;
             }
 
-            Responser.create(res, responseCode, []);
+            return Responser.create(res, responseCode, []);
         })
         .catch(err => {
-            Responser.create(res, -1, err);
+            return Responser.create(res, -1, err);
         });
 };
 

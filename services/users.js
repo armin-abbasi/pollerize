@@ -10,10 +10,10 @@ const create = (req, res) => {
     User
         .create(input)
         .then(result => {
-            Responser.create(res, 0, result);
+            return Responser.create(res, 0, result);
         })
         .catch(err => {
-            Responser.create(res, -1, err);
+            return Responser.create(res, -1, err);
         });
 };
 
@@ -21,10 +21,10 @@ const getAll = (req, res) => {
     User
         .findAll()
         .then(Users => {
-            Responser.create(res, 0, Users);
+            return Responser.create(res, 0, Users);
         })
         .catch(err => {
-            Responser.create(res, -1, err);
+            return Responser.create(res, -1, err);
         });
 };
 
@@ -32,10 +32,10 @@ const getById = (req, res) => {
     User
         .findByPk(req.params.id)
         .then(User => {
-            Responser.create(res, 0, User);
+            return Responser.create(res, 0, User);
         })
         .catch(err => {
-            Responser.create(res, -1, err);
+            return Responser.create(res, -1, err);
         });
 };
 
@@ -45,12 +45,12 @@ const update = (req, res) => {
         .then(User => {
             User.update(req.body)
                 .then(updatedItem => {
-                    Responser.create(res, 0, updatedItem);
+                    return Responser.create(res, 0, updatedItem);
                 })
-                .catch(err => Responser.create(res, -1, err));
+                .catch(err => { return Responser.create(res, -1, err) });
         })
         .catch(err => {
-            Responser.create(res, -1, err);
+            return Responser.create(res, -1, err);
         });
 };
 
@@ -64,10 +64,10 @@ const deleteById = (req, res) => {
                 responseCode = -2;
             }
 
-            Responser.create(res, responseCode, []);
+            return Responser.create(res, responseCode, []);
         })
         .catch(err => {
-            Responser.create(res, -1, err);
+            return Responser.create(res, -1, err);
         });
 };
 

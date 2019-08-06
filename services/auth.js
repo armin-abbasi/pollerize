@@ -12,11 +12,11 @@ const login = (req, res) => {
                 Responser.create(res, -5, []);
             }
 
-            Responser.create(res, 3, []);
+            return Responser.create(res, 3, []);
         })
         .catch(err => {
             console.log(err);
-            Responser.create(res, -1, err);
+            return Responser.create(res, -1, err);
         });
 };
 
