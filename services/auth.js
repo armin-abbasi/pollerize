@@ -1,6 +1,8 @@
 const models = require('../models');
 const User = models.User;
 const Responser = require('../utils/responser');
+const JWT = require('jsonwebtoken');
+const secret = require('../config/app.json').secret;
 
 const login = (req, res) => {
     let input = req.body;
@@ -9,10 +11,13 @@ const login = (req, res) => {
         .then(User => {
             // Invalid username or password
             if (User.validPassword(input.password) !== true) {
-                Responser.create(res, -5, []);
+                return Responser.create(res, -5, []);
             }
-
-            return Responser.create(res, 3, []);
+            
+            // Generate json web token
+            let token = JWT.sign(JSON.stringify(User), secret);
+            
+            return Responser.create(res, 3, {token});
         })
         .catch(err => {
             console.log(err);
