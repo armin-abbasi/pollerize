@@ -33,5 +33,5 @@ module.exports.create = (res, code, data) => {
         'data': resData
     };
 
-    res.status(resStatus).json(responseObject).end();
+    return res.status(resStatus).json(responseObject);
 };
