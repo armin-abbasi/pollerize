@@ -2,6 +2,7 @@ const router = require('express').Router();
 const userService = require('../services/users');
 const authService = require('../services/auth');
 
+// User CRUD routes
 router.post('/', (req, res) => {
     userService
         .create(req, res);
@@ -27,10 +28,10 @@ router.delete('/:id', (req, res) => {
         .deleteById(req, res);
 });
 
-// user authentication routes
-router.post('/login', (req, res) => {
+// User authentication routes
+router.post('/sign-in', (req, res) => {
     authService
-        .login(req, res);
+        .signIn(req, res);
 });
 
 module.exports = router;
