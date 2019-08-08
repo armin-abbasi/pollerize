@@ -2,6 +2,7 @@ const server = require('express')();
 const config = require('./config/app');
 const pollRoutes = require('./routes/polls');
 const userRoutes = require('./routes/users');
+const voteRoutes = require('./routes/votes');
 const bodyParser = require('body-parser');
 const errorHandler = require('./middlewares/handler');
 const port = config.port || 3000;
@@ -11,6 +12,8 @@ server.use(bodyParser.json({ type: 'application/json' }));
 server.use('/polls', pollRoutes);
 
 server.use('/user', userRoutes);
+
+server.use('/votes', voteRoutes);
 
 server.use(errorHandler.check);
 
