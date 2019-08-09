@@ -3,9 +3,10 @@ const Vote = models.Vote;
 const Responser = require('../utils/responser');
 
 const create = (req, res) => {
-    let pollId = req.params.pollId;
+    let pollId = req.body.pollId;
     let answer = req.body.answer;
     let count = 0;
+    
     Vote
         .create({
             pollId,
@@ -18,7 +19,6 @@ const create = (req, res) => {
         .catch((err) => {
             return Responser.create(res, -1, err);
         });
-
 };
 
 const poll = (req, res) => {

@@ -4,7 +4,7 @@ const authMiddleware = require('../middlewares/authentication');
 
 router.use(authMiddleware.check);
 
-router.post('/:pollId/create', (req, res) => {
+router.post('/create', (req, res) => {
     voteService
         .create(req, res);
 });
