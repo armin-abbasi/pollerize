@@ -17,6 +17,12 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Poll, {
       foreignKey: 'userId'
     })
+
+    User.belongsToMany(model.Vote, {
+      through: model.UserVote,
+      foreignKey: 'vote_id',
+      as: 'votes'
+    });
   };
 
   // generate hash for user model
