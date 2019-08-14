@@ -15,7 +15,8 @@ router.delete('/:vodeId', (req, res) => {
 });
 
 router.post('/:pollId/poll', (req, res) => {
-    
+    voteService
+        .poll(req, res);
 });
 
 router.post('/:pollId/un-poll', (req, res) => {

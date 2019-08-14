@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     
     Vote.belongsToMany(models.User, {
       through: models.UserVote,
-      foreignKey: 'user_id',
+      foreignKey: 'userId',
       as: 'users'
     });
   };

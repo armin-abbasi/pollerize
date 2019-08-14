@@ -1,5 +1,6 @@
 const models = require('../models');
 const Vote = models.Vote;
+const UserVote = models.UserVote;
 const Responser = require('../utils/responser');
 
 const create = (req, res) => {
@@ -39,7 +40,50 @@ const deleteById = (req, res) => {
 };
 
 const poll = (req, res) => {
+    let pollId = req.params.pollId;
+    let voteId = req.body.voteId;
+    let userId = req.body.user.id;
 
+    Vote
+        .findByPk(voteId)
+        .then(Vote => {
+            UserVote
+            .findAll({where: {voteId: Vote.id, userId}})
+            .then(UserVote => {
+                // Each user can vote once
+                if (UserVote.length !== 0) {
+                    return Responser.create(res, -1, {message: "You've voted before"});
+                }
+            })
+            .catch(err => {
+                return Responser.create(res, -1, err);
+            });
+
+            // Add this vote's count value and update
+            let count = ++Vote.count;
+
+            Vote
+                .update({count: count})
+                .then(updatedItem => {
+                    return Responser.create(res, 0, updatedItem);
+                })
+                .catch(err => {
+                    return Responser.create(res, -1, err);
+                });
+            
+            // Insert into UserVotes table
+            Vote
+                .setUsers([userId])
+                .then(res => {
+                    return Responser.create(res, 0, []);
+                })
+                .catch(err => {
+                    return Responser.create(res, -1, err);
+                })
+        })
+        .catch(err => {
+            return Responser.create(res, -1, err);
+        });
 };
 
 const unPoll = (req, res) => {
