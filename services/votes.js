@@ -46,8 +46,6 @@ const poll = (req, res) => {
     Vote
         .findByPk(voteId)
         .then(Vote => {
-            console.log(`voteID : ${voteId} and userId : ${userId}`);
-            // process.exit(-1);
             UserVote
                 .findAll({where: {voteId: Vote.id, userId}})
                 .then(UserVote => {
