@@ -23,7 +23,10 @@ module.exports.create = (res, code, data) => {
     
     let resData = data;
     
-    if (data !== null && data.hasOwnProperty('message') && code !== 0) {
+    if (data !== null &&
+        data !== undefined &&
+         data.hasOwnProperty('message') &&
+          code !== 0) {
         // resData = (process.env.DEBUG === true) ? data.message : null;
         resData = data.message;
     }

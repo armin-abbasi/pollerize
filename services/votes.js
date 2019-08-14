@@ -40,24 +40,25 @@ const deleteById = (req, res) => {
 };
 
 const poll = (req, res) => {
-    let pollId = req.params.pollId;
     let voteId = req.body.voteId;
     let userId = req.body.user.id;
 
     Vote
         .findByPk(voteId)
         .then(Vote => {
+            console.log(`voteID : ${voteId} and userId : ${userId}`);
+            // process.exit(-1);
             UserVote
-            .findAll({where: {voteId: Vote.id, userId}})
-            .then(UserVote => {
-                // Each user can vote once
-                if (UserVote.length !== 0) {
-                    return Responser.create(res, -1, {message: "You've voted before"});
-                }
-            })
-            .catch(err => {
-                return Responser.create(res, -1, err);
-            });
+                .findAll({where: {voteId: Vote.id, userId}})
+                .then(UserVote => {
+                    // Each user can vote once
+                    if (UserVote.length !== 0) {
+                        return Responser.create(res, -1, {message: "You've voted before"});
+                    }
+                })
+                .catch(err => {
+                    return Responser.create(res, -1, err);
+                });
 
             // Add this vote's count value and update
             let count = ++Vote.count;
@@ -65,17 +66,17 @@ const poll = (req, res) => {
             Vote
                 .update({count: count})
                 .then(updatedItem => {
-                    return Responser.create(res, 0, updatedItem);
+                    // Continue
                 })
                 .catch(err => {
                     return Responser.create(res, -1, err);
                 });
             
             // Insert into UserVotes table
-            Vote
-                .setUsers([userId])
-                .then(res => {
-                    return Responser.create(res, 0, []);
+            UserVote
+                .create({userId,voteId})
+                .then(result => {
+                    return Responser.create(res, 0, result);
                 })
                 .catch(err => {
                     return Responser.create(res, -1, err);
