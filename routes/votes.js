@@ -19,8 +19,9 @@ router.post('/poll', (req, res) => {
         .poll(req, res);
 });
 
-router.post('/:pollId/un-poll', (req, res) => {
-    
+router.post('/un-poll', (req, res) => {
+    voteService
+        .unPoll(req, res);
 });
 
 module.exports = router;

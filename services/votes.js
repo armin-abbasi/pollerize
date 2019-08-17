@@ -46,39 +46,38 @@ const poll = (req, res) => {
     Vote
         .findByPk(voteId)
         .then(Vote => {
+            // Avoid redundant polls by same user
             UserVote
                 .findAll({where: {voteId: Vote.id, userId}})
-                .then(UserVote => {
+                .then(foundVotes => {
                     // Each user can vote once
-                    if (UserVote.length !== 0) {
+                    if (foundVotes.length !== 0) {
                         return Responser.create(res, -1, {message: "You've voted before"});
                     }
+
+                    // Add this vote's count value and update
+                    let count = ++Vote.count;
+
+                    Vote
+                        .update({count})
+                        .then(updatedItem => {
+                            // Insert into UserVotes table
+                            UserVote
+                                .create({userId,voteId})
+                                .then(result => {
+                                    return Responser.create(res, 0, result);
+                                })
+                                .catch(err => {
+                                    return Responser.create(res, -1, err);
+                                });
+                        })
+                        .catch(err => {
+                            return Responser.create(res, -1, err);
+                        });
                 })
                 .catch(err => {
                     return Responser.create(res, -1, err);
                 });
-
-            // Add this vote's count value and update
-            let count = ++Vote.count;
-
-            Vote
-                .update({count: count})
-                .then(updatedItem => {
-                    // Continue
-                })
-                .catch(err => {
-                    return Responser.create(res, -1, err);
-                });
-            
-            // Insert into UserVotes table
-            UserVote
-                .create({userId,voteId})
-                .then(result => {
-                    return Responser.create(res, 0, result);
-                })
-                .catch(err => {
-                    return Responser.create(res, -1, err);
-                })
         })
         .catch(err => {
             return Responser.create(res, -1, err);
@@ -86,7 +85,36 @@ const poll = (req, res) => {
 };
 
 const unPoll = (req, res) => {
+    let voteId = req.body.voteId;
+    let userId = req.body.user.id;
 
+    UserVote
+        .destroy({where: {voteId, userId}})
+        .then(result => {
+            // Decrease vote's count number
+            Vote
+                .findByPk(voteId)
+                .then(Vote => {
+                    let count = Vote.count > 0 ? --Vote.count : 0;
+
+                    Vote
+                        .update({count})
+                        .then(updatedItem => {
+                            return Responser.create(res, 0, updatedItem);
+                        })
+                        .catch(err => {
+                            return Responser.create(res, -1, err);
+                        });
+                })
+                .catch(err => {
+                    return Responser.create(res, -1, err);
+                });
+        })
+        .catch(err => {
+            return Responser.create(res, 1, err);
+        });
+
+    
 };
 
 module.exports = {create, poll, unPoll, delete: deleteById};
