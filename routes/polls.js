@@ -1,10 +1,21 @@
 const router = require('express').Router();
 const pollService = require('../services/polls');
 const { authenticate } = require('../middlewares/authentication');
+const { check, validationResult } = require('express-validator');
 
 router.use(authenticate);
 
-router.post('/', (req, res) => {
+router.post('/', [
+    check('userId').isNumeric(),
+    check('question').isString(),
+    check('expiresAt').isString()
+], (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+
     pollService
         .create(req, res);
 });

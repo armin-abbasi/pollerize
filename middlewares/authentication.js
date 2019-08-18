@@ -12,8 +12,10 @@ module.exports.authenticate = (req, res, next) => {
 
     try {
         const user = JWT.verify(token, secret);
+        
         // Assign user info to request body
         req.body.user = user;
+        
         return next();
     } catch (err) {
         // Invalid token exception
