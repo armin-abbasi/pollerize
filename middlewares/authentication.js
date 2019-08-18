@@ -2,7 +2,7 @@ const JWT = require('jsonwebtoken');
 const Responser = require('../utils/responser');
 const secret = require('../config/app.json').secret;
 
-module.exports.check = (req, res, next) => {
+module.exports.authenticate = (req, res, next) => {
     if (req.headers.authorization === undefined) {
         return Responser.create(res, -3, []);
     }
