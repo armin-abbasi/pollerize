@@ -1,4 +1,4 @@
-const server = require('express')();
+const app = require('express')();
 const config = require('./config/app');
 const pollRoutes = require('./routes/polls');
 const userRoutes = require('./routes/users');
@@ -7,16 +7,16 @@ const bodyParser = require('body-parser');
 const errorHandler = require('./middlewares/handler');
 const port = config.port || 3000;
 
-server.use(bodyParser.json({ type: 'application/json' }));
+app.use(bodyParser.json({ type: 'application/json' }));
 
-server.use('/polls', pollRoutes);
+app.use('/polls', pollRoutes);
 
-server.use('/user', userRoutes);
+app.use('/user', userRoutes);
 
-server.use('/votes', voteRoutes);
+app.use('/votes', voteRoutes);
 
-server.use(errorHandler.check);
+app.use(errorHandler.check);
 
-server.listen(port, () => {
+app.listen(port, () => {
     console.log(`app listening to port ${port}`);
 });
