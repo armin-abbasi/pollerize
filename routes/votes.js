@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const voteService = require('../services/votes');
-const authMiddleware = require('../middlewares/authentication');
+const { check } = require('../middlewares/authentication');
 
-router.use(authMiddleware.check);
+router.use(check);
 
 router.post('/', (req, res) => {
     voteService
