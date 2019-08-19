@@ -1,10 +1,21 @@
 const router = require('express').Router();
 const voteService = require('../services/votes');
 const { authenticate } = require('../middlewares/authentication');
+const { check, validationResult } = require('express-validator');
+const Responser = require('../utils/responser');
 
 router.use(authenticate);
 
-router.post('/', (req, res) => {
+router.post('/', [
+    check('pollId').isNumeric().not().isEmpty(),
+    check('answer').isString().not().isEmpty()
+], (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return Responser.create(res, -6, errors.array());
+    }
+
     voteService
         .create(req, res);
 });
@@ -14,12 +25,28 @@ router.delete('/:vodeId', (req, res) => {
         .delete(req, res);
 });
 
-router.post('/poll', (req, res) => {
+router.post('/poll', [
+    check('voteId').isNumeric().not().isEmpty()
+], (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return Responser.create(res, -6, errors.array());
+    }
+
     voteService
         .poll(req, res);
 });
 
-router.post('/un-poll', (req, res) => {
+router.post('/un-poll', [
+    check('voteId').isNumeric().not().isEmpty()
+], (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return Responser.create(res, -6, errors.array());
+    }
+
     voteService
         .unPoll(req, res);
 });
