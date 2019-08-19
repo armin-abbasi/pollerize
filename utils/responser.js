@@ -5,14 +5,16 @@ const errorMessageMap = {
     '-2': 'not found',
     '-3': 'not authentciated',
     '-4': 'unauthorized',
-    '-5': 'username or password are incorrect'
+    '-5': 'username or password are incorrect',
+    '-6': 'invalid input'
 };
 
 const errorStatusCode = {
     '-2': 404,
     '-3': 401,
     '-4': 403,
-    '-5': 401
+    '-5': 401,
+    '-6': 422
 };
 
 module.exports.create = (res, code, data) => {

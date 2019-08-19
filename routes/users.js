@@ -1,9 +1,25 @@
 const router = require('express').Router();
 const userService = require('../services/users');
 const authService = require('../services/auth');
+const { check, validationResult } = require('express-validator');
+const Responser = require('../utils/responser');
 
 // User CRUD routes
-router.post('/', (req, res) => {
+router.post('/', [
+    check('name').isString().not().isEmpty(),
+    check('username').isString().not().isEmpty(),
+    check('password').isString().not().isEmpty(),
+    check('gender').isString().not().isEmpty(),
+    check('dob').isString().not().isEmpty(),
+    check('location').isString().not().isEmpty(),
+    check('active').isBoolean()
+], (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return Responser.create(res, -6, errors.array());
+    }
+    
     userService
         .create(req, res);
 });
@@ -18,7 +34,21 @@ router.get('/:id', (req, res) => {
         .getById(req, res);
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', [
+    check('name').isString(),
+    check('username').isString(),
+    check('password').isString(),
+    check('gender').isString(),
+    check('dob').isString(),
+    check('location').isString(),
+    check('active').isBoolean()
+], (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return Responser.create(res, -6, errors.array());
+    }
+    
     userService
         .update(req, res);
 });
