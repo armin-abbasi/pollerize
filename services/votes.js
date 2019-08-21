@@ -39,49 +39,31 @@ const deleteById = (req, res) => {
         });
 };
 
-const poll = (req, res) => {
-    let voteId = req.body.voteId;
-    let userId = req.body.user.id;
+const poll = async(req, res) => {
+    try {
+        let voteId = req.body.voteId;
+        let userId = req.body.user.id;
 
-    Vote
-        .findByPk(voteId)
-        .then(Vote => {
-            // Avoid redundant polls by same user
-            UserVote
-                .findAll({where: {voteId: Vote.id, userId}})
-                .then(foundVotes => {
-                    // Each user can vote once
-                    if (foundVotes.length !== 0) {
-                        return Responser.create(res, -1, {message: "You've voted before"});
-                    }
+        let PollVote = await Vote.findByPk(voteId);
+        
+        let foundVotes = await UserVote.findAll({where: {voteId: PollVote.id, userId}});
 
-                    // Add this vote's count value and update
-                    let count = ++Vote.count;
+        if (foundVotes.length !== 0) {
+            return Responser.create(res, -1, {message: "You've voted before"});
+        }
 
-                    Vote
-                        .update({count})
-                        .then(updatedItem => {
-                            // Insert into UserVotes table
-                            UserVote
-                                .create({userId,voteId})
-                                .then(result => {
-                                    return Responser.create(res, 0, result);
-                                })
-                                .catch(err => {
-                                    return Responser.create(res, -1, err);
-                                });
-                        })
-                        .catch(err => {
-                            return Responser.create(res, -1, err);
-                        });
-                })
-                .catch(err => {
-                    return Responser.create(res, -1, err);
-                });
-        })
-        .catch(err => {
-            return Responser.create(res, -1, err);
-        });
+        // Add this vote's count value and update
+        let count = ++PollVote.count;
+
+        let updatedItem = await PollVote.update({count});
+
+        let result = await UserVote.create({userId, voteId});
+
+        // Return final result as success message
+        return Responser.create(res, 0, result);
+    } catch (err) {
+        return Responser.create(res, -1, err);
+    }
 };
 
 const unPoll = (req, res) => {
