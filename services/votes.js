@@ -45,7 +45,7 @@ const poll = async(req, res) => {
         if (foundVotes.length !== 0) {
             return Responser.create(res, -1, {message: "You've voted before"});
         }
-        // Add this vote's count value and update
+        // Increase vote count by one unit.
         let count = ++PollVote.count;
         let updatedItem = await PollVote.update({count});
         let result = await UserVote.create({userId, voteId});
@@ -63,7 +63,7 @@ const unPoll = async(req, res) => {
         let deleteResult = await UserVote.destroy({where: {voteId, userId}});
         if (deleteResult) {
             let pollVote = await Vote.findByPk(voteId);     
-            // Increase vote count by one unit.
+            // Decrease vote count by one unit.
             let count = pollVote.count > 0 ? --pollVote.count : 0;           
             let updatedItem = await pollVote.update({count});
             return Responser.create(res, 0, updatedItem);
