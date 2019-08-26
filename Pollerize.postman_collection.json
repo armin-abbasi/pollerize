@@ -42,6 +42,16 @@
 				{
 					"name": "Get by ID",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -64,6 +74,16 @@
 				{
 					"name": "Delete by ID",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -86,6 +106,16 @@
 				{
 					"name": "Create",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -97,7 +127,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"userId\": 1,\n\t\"question\": \"Whos gonna win on election 2020?\",\n\t\"expiresAt\": \"2019-07-09\"\n}"
+							"raw": "{\n\t\"userId\": 1,\n\t\"question\": \"Whos gonna win on election 2020?\",\n\t\"expiresAt\": 222\n}"
 						},
 						"url": {
 							"raw": "{{HOST}}/polls/",
