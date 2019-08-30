@@ -11,7 +11,7 @@ app.use(bodyParser.json({ type: 'application/json' }));
 
 app.use('/polls', pollRoutes);
 
-app.use('/user', userRoutes);
+app.use('/users', userRoutes);
 
 app.use('/votes', voteRoutes);
 
