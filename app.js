@@ -20,3 +20,5 @@ app.use(check);
 app.listen(port, () => {
     console.log(`app listening to port ${port}`);
 });
+
+module.exports = app;
