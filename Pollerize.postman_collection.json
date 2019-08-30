@@ -157,7 +157,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{HOST}}/user",
+							"raw": "{{HOST}}/users",
 							"host": [
 								"{{HOST}}"
 							],
@@ -178,7 +178,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{HOST}}/user/2",
+							"raw": "{{HOST}}/users/2",
 							"host": [
 								"{{HOST}}"
 							],
@@ -200,7 +200,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{HOST}}/user/1",
+							"raw": "{{HOST}}/users/1",
 							"host": [
 								"{{HOST}}"
 							],
@@ -229,7 +229,7 @@
 							"raw": "{\n\t\"name\": \"John Doe\",\n\t\"username\": \"john.doe\",\n\t\"password\": \"abcd\",\n\t\"gender\": \"male\",\n\t\"dob\": \"1990-06-15\",\n\t\"location\": \"iran/tehran\",\n\t\"active\": true\n}"
 						},
 						"url": {
-							"raw": "{{HOST}}/user/",
+							"raw": "{{HOST}}/users/",
 							"host": [
 								"{{HOST}}"
 							],
@@ -258,7 +258,7 @@
 							"raw": "{\n\t\"username\": \"john.doe\",\n\t\"password\": \"abcd\"\n}"
 						},
 						"url": {
-							"raw": "{{HOST}}/user/sign-in",
+							"raw": "{{HOST}}/users/sign-in",
 							"host": [
 								"{{HOST}}"
 							],
