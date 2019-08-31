@@ -2,6 +2,7 @@ process.env.NODE_ENV = 'test';
 let app = require('../app');
 let chai = require('chai');
 let chaiHttp = require('chai-http');
+let expect = chai.expect;
 
 chai.use(chaiHttp);
 
@@ -13,11 +14,11 @@ describe('Get users', () => {
             .get('/users')
             .end((err, res) => {
                 if (err) throw err;
-                chai.expect(res.status).to.be.equal(200);
-                chai.expect(res.body).to.be.a('object');
-                chai.expect(res.body.code).to.be.equal(0);
-            done();
-          });
+                expect(res.status).to.be.equal(200);
+                expect(res.body).to.be.a('object');
+                expect(res.body.code).to.be.equal(0);
+                done();
+            });
     });
 });
 
@@ -38,9 +39,9 @@ describe('Create user', () => {
             .send(user)
             .end((err, res) => {
                 if (err) throw err;
-                chai.expect(res.status).to.be.equal(200);
-                chai.expect(res.body.data.name).to.be.equal(user.name);
-                chai.expect(res.body.data.username).to.be.equal(user.username);
+                expect(res.status).to.be.equal(200);
+                expect(res.body.data.name).to.be.equal(user.name);
+                expect(res.body.data.username).to.be.equal(user.username);
                 done();
             });
     });
