@@ -6,15 +6,16 @@ let chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 
+// API tests for users service module.
+
 describe('Get users', () => {
     it('it should return all of users', (done) => {
         chai.request(app)
             .get('/users')
             .end((err, res) => {
-                console.log(res);
-                res.should.have.status(200);
-                res.body.should.be.a('array');
-                // res.body.length.should.be.eql(0);
+                chai.expect(res.status).to.be.equal(200);
+                chai.expect(res.body).to.be.a('object');
+                chai.expect(res.body.code).to.be.equal(0);
             done();
           });
     });
