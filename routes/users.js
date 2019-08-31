@@ -35,13 +35,13 @@ router.get('/:id', (req, res) => {
 });
 
 router.put('/:id', [
-    check('name').isString(),
-    check('username').isString(),
-    check('password').isString(),
-    check('gender').isString(),
-    check('dob').isString(),
-    check('location').isString(),
-    check('active').isBoolean()
+    check('name').optional().isString(),
+    check('username').optional().isString(),
+    check('password').optional().isString(),
+    check('gender').optional().isString(),
+    check('dob').optional().isString(),
+    check('location').optional().isString(),
+    check('active').optional().isBoolean()
 ], (req, res) => {
     const errors = validationResult(req);
 

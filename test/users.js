@@ -66,3 +66,37 @@ describe('Fail to create user', () => {
             });
     });
 })
+
+describe('Updating user', () => {
+    it('should update an user successfully', (done) => {
+        let user = {
+            "name": "John Doe",
+            "username": "john.doe",
+            "password": "abcd",
+            "gender": "male",
+            "dob": "1990-06-15",
+            "location": "iran/tehran",
+            "active": true
+        }
+
+        let updateInfo = {username: 'jack.doe', location: 'California/USA'};
+
+        chai.request(app)
+            .post('/users')
+            .send(user)
+            .end((err, res) => {
+                if (err) throw err;
+                expect(res.status).to.be.equal(200);
+                expect(res.body.data.name).to.be.equal(user.name);
+                chai.request(app)
+                    .put(`/users/${res.body.data.id}`)
+                    .send(updateInfo)
+                    .end((err, res) => {
+                        if (err) throw err;
+                        expect(res.body.data.username).to.be.equal(updateInfo.username);
+                        expect(res.body.data.location).to.be.equal(updateInfo.location);
+                        done();
+                    });
+            });
+    })
+});
