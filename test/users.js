@@ -46,3 +46,23 @@ describe('Create user', () => {
             });
     });
 })
+
+describe('Fail to create user', () => {
+    it('should return validation errors', (done) => {
+        let user = {
+            "name": "John Doe",
+            "location": "iran/tehran",
+            "active": true
+        };
+
+        chai.request(app)
+            .post('/users')
+            .send(user)
+            .end((err, res) => {
+                if (err) throw err;
+                expect(res.status).to.be.equal(422);
+                expect(res.body.code).to.be.equal(-6);
+                done();
+            });
+    });
+})
