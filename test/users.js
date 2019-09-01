@@ -45,7 +45,7 @@ describe('Create user', () => {
                 done();
             });
     });
-})
+});
 
 describe('Fail to create user', () => {
     it('should return validation errors', (done) => {
@@ -65,7 +65,7 @@ describe('Fail to create user', () => {
                 done();
             });
     });
-})
+});
 
 describe('Updating user', () => {
     it('should update an user successfully', (done) => {
@@ -77,7 +77,7 @@ describe('Updating user', () => {
             "dob": "1990-06-15",
             "location": "iran/tehran",
             "active": true
-        }
+        };
 
         let updateInfo = {username: 'jack.doe', location: 'California/USA'};
 
