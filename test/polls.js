@@ -12,7 +12,7 @@ getToken = (callback) => {
     chai.request(app)
         .post('/users/sign-in')
         .send({
-            username: "test",
+            username: "john.doe",
             password: "abcd"
         })
         .end((err, res) => {
@@ -20,7 +20,7 @@ getToken = (callback) => {
                 callback(res.body.data.token);
             }
         );
-}
+};
 
 describe('Get polls', () => {
     it('should return all of polls', (done) => {
