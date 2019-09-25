@@ -1,7 +1,7 @@
 const models = require('../models');
 const Vote = models.Vote;
 const UserVote = models.UserVote;
-const Responser = require('../utils/responser');
+const Response = require('../utils/responser');
 
 const create = (req, res) => {
     let pollId = req.body.pollId;
@@ -14,10 +14,10 @@ const create = (req, res) => {
             count
         })
         .then((result) => {
-            return Responser.create(res, 0, result);
+            return Response.create(res, 0, result);
         })
         .catch((err) => {
-            return Responser.create(res, -1, err);
+            return Response.create(res, -1, err);
         });
 };
 
@@ -29,10 +29,10 @@ const deleteById = (req, res) => {
             if (result === 0) {
                 responseCode = -2;
             }
-            return Responser.create(res, responseCode, []);
+            return Response.create(res, responseCode, []);
         })
         .catch(err => {
-            return Responser.create(res, -1, err);
+            return Response.create(res, -1, err);
         });
 };
 
@@ -43,16 +43,16 @@ const poll = async(req, res) => {
         let PollVote = await Vote.findByPk(voteId);
         let foundVotes = await UserVote.findAll({where: {voteId: PollVote.id, userId}});
         if (foundVotes.length !== 0) {
-            return Responser.create(res, -1, {message: "You've voted before"});
+            return Response.create(res, -1, {message: "You've voted before"});
         }
         // Increase vote count by one unit.
         let count = ++PollVote.count;
         let updatedItem = await PollVote.update({count});
         let result = await UserVote.create({userId, voteId});
         // Return final result as success message
-        return Responser.create(res, 0, result);
+        return Response.create(res, 0, result);
     } catch (err) {
-        return Responser.create(res, -1, err);
+        return Response.create(res, -1, err);
     }
 };
 
@@ -66,11 +66,11 @@ const unPoll = async(req, res) => {
             // Decrease vote count by one unit.
             let count = pollVote.count > 0 ? --pollVote.count : 0;           
             let updatedItem = await pollVote.update({count});
-            return Responser.create(res, 0, updatedItem);
+            return Response.create(res, 0, updatedItem);
         }
-        return Responser.create(res, -1, []);
+        return Response.create(res, -1, []);
     } catch (err) {
-        return Responser.create(res, -1, err);
+        return Response.create(res, -1, err);
     }  
 };
 

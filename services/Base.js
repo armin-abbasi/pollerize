@@ -15,7 +15,7 @@ class Base {
      * @param req
      * @param res
      */
-    static create(req, res) {
+    create(req, res) {
         let input = req.body;
         this.Model
             .create(input)
@@ -32,7 +32,7 @@ class Base {
      * @param req
      * @param res
      */
-    static getAll(req, res) {
+    getAll(req, res) {
         this.Model
             .findAll()
             .then(items => {
@@ -48,14 +48,14 @@ class Base {
      * @param req
      * @param res
      */
-    static getById(req, res) {
+    getById(req, res) {
         this.Model
             .findByPk(req.params.id)
             .then(item => {
-                return Responser.create(res, 0, item);
+                return Response.create(res, 0, item);
             })
             .catch(err => {
-                return Responser.create(res, -1, err);
+                return Response.create(res, -1, err);
             });
     }
 
@@ -64,7 +64,7 @@ class Base {
      * @param req
      * @param res
      */
-    static deleteById(req, res) {
+    deleteById(req, res) {
         this.Model
             .destroy({where: {id: req.params.id}})
             .then(item => {
@@ -74,11 +74,13 @@ class Base {
                     responseCode = -2;
                 }
 
-                return Responser.create(res, responseCode, []);
+                return Response.create(res, responseCode, []);
             })
             .catch(err => {
-                return Responser.create(res, -1, err);
+                return Response.create(res, -1, err);
             });
     }
 
 }
+
+module.exports = Base;

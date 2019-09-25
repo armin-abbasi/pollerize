@@ -2,7 +2,7 @@ const router = require('express').Router();
 const userService = require('../services/users');
 const authService = require('../services/auth');
 const { check, validationResult } = require('express-validator');
-const Responser = require('../utils/responser');
+const Response = require('../utils/responser');
 
 // User CRUD routes
 router.post('/', [
@@ -17,7 +17,7 @@ router.post('/', [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return Responser.create(res, -6, errors.array());
+        return Response.create(res, -6, errors.array());
     }
     
     userService
@@ -46,7 +46,7 @@ router.put('/:id', [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return Responser.create(res, -6, errors.array());
+        return Response.create(res, -6, errors.array());
     }
     
     userService

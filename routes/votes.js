@@ -2,7 +2,7 @@ const router = require('express').Router();
 const voteService = require('../services/votes');
 const { authenticate } = require('../middlewares/authentication');
 const { check, validationResult } = require('express-validator');
-const Responser = require('../utils/responser');
+const Response = require('../utils/responser');
 
 router.use(authenticate);
 
@@ -13,7 +13,7 @@ router.post('/', [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return Responser.create(res, -6, errors.array());
+        return Response.create(res, -6, errors.array());
     }
 
     voteService
@@ -31,7 +31,7 @@ router.post('/poll', [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return Responser.create(res, -6, errors.array());
+        return Response.create(res, -6, errors.array());
     }
 
     voteService
@@ -44,7 +44,7 @@ router.post('/un-poll', [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return Responser.create(res, -6, errors.array());
+        return Response.create(res, -6, errors.array());
     }
 
     voteService

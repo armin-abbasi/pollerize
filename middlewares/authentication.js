@@ -1,10 +1,10 @@
 const JWT = require('jsonwebtoken');
-const Responser = require('../utils/responser');
+const Response = require('../utils/responser');
 const secret = require('../config/app.json').secret;
 
 module.exports.authenticate = (req, res, next) => {
     if (req.headers.authorization === undefined) {
-        return Responser.create(res, -3, []);
+        return Response.create(res, -3, []);
     }
     
     // Authenticate the user
@@ -19,6 +19,6 @@ module.exports.authenticate = (req, res, next) => {
         return next();
     } catch (err) {
         // Invalid token exception
-        return Responser.create(res, -3, err);
+        return Response.create(res, -3, err);
     }
 }

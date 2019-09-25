@@ -1,8 +1,10 @@
 const router = require('express').Router();
-const pollService = require('../services/polls');
 const { authenticate } = require('../middlewares/authentication');
 const { check, validationResult } = require('express-validator');
-const Responser = require('../utils/responser');
+const Response = require('../utils/responser');
+
+const Poll = require('../services/polls');
+const pollService = new Poll();
 
 router.use(authenticate);
 
@@ -14,7 +16,7 @@ router.post('/', [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return Responser.create(res, -6, errors.array());
+        return Response.create(res, -6, errors.array());
     }
 
     pollService

@@ -1,6 +1,6 @@
 const models = require('../models');
 const User = models.User;
-const Responser = require('../utils/responser');
+const Response = require('../utils/responser');
 
 class Users {
 
@@ -12,10 +12,10 @@ class Users {
         User
             .create(input)
             .then(result => {
-                return Responser.create(res, 0, result);
+                return Response.create(res, 0, result);
             })
             .catch(err => {
-                return Responser.create(res, -1, err);
+                return Response.create(res, -1, err);
             });
     }
 
@@ -23,10 +23,10 @@ class Users {
         User
             .findAll()
             .then(Users => {
-                return Responser.create(res, 0, Users);
+                return Response.create(res, 0, Users);
             })
             .catch(err => {
-                return Responser.create(res, -1, err);
+                return Response.create(res, -1, err);
             });
     }
 
@@ -34,10 +34,10 @@ class Users {
         User
             .findByPk(req.params.id)
             .then(User => {
-                return Responser.create(res, 0, User);
+                return Response.create(res, 0, User);
             })
             .catch(err => {
-                return Responser.create(res, -1, err);
+                return Response.create(res, -1, err);
             });
     }
 
@@ -47,14 +47,14 @@ class Users {
             .then(User => {
                 User.update(req.body)
                     .then(updatedItem => {
-                        return Responser.create(res, 0, updatedItem);
+                        return Response.create(res, 0, updatedItem);
                     })
                     .catch(err => {
-                        return Responser.create(res, -1, err)
+                        return Response.create(res, -1, err)
                     });
             })
             .catch(err => {
-                return Responser.create(res, -1, err);
+                return Response.create(res, -1, err);
             });
     }
 
@@ -68,10 +68,10 @@ class Users {
                     responseCode = -2;
                 }
 
-                return Responser.create(res, responseCode, []);
+                return Response.create(res, responseCode, []);
             })
             .catch(err => {
-                return Responser.create(res, -1, err);
+                return Response.create(res, -1, err);
             });
     }
 
