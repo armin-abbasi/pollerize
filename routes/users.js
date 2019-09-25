@@ -1,8 +1,10 @@
 const router = require('express').Router();
-const userService = require('../services/users');
 const authService = require('../services/auth');
 const { check, validationResult } = require('express-validator');
 const Response = require('../utils/responser');
+
+const User = require('../services/Users');
+const userService = new User();
 
 // User CRUD routes
 router.post('/', [

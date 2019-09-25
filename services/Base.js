@@ -11,7 +11,7 @@ class Base {
     }
 
     /**
-     * Create Resource
+     * Create resource
      * @param req
      * @param res
      */
@@ -21,6 +21,29 @@ class Base {
             .create(input)
             .then(result => {
                 return Response.create(res, 0, result);
+            })
+            .catch(err => {
+                return Response.create(res, -1, err);
+            });
+    }
+
+    /**
+     * Update a resource
+     * @param req
+     * @param res
+     */
+    update(req, res) {
+        let input = req.body;
+        this.Model
+            .findByPk(req.params.id)
+            .then(result => {
+                result.update(input)
+                    .then(updatedItem => {
+                        return Response.create(res, 0, updatedItem);
+                    })
+                    .catch(err => {
+                        return Response.create(res, -1, err)
+                    });
             })
             .catch(err => {
                 return Response.create(res, -1, err);
