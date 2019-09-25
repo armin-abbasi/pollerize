@@ -8,6 +8,11 @@ const voteService = new Vote();
 
 router.use(authenticate);
 
+router.get('/', (req, res) => {
+    voteService
+        .getAll(req, res);
+});
+
 router.post('/', [
     check('pollId').isNumeric().not().isEmpty(),
     check('answer').isString().not().isEmpty()
@@ -22,9 +27,9 @@ router.post('/', [
         .create(req, res);
 });
 
-router.delete('/:vodeId', (req, res) => {
+router.delete('/:id', (req, res) => {
     voteService
-        .delete(req, res);
+        .deleteById(req, res);
 });
 
 router.post('/poll', [
