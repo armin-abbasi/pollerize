@@ -3,7 +3,7 @@ const { authenticate } = require('../middlewares/authentication');
 const { check, validationResult } = require('express-validator');
 const Response = require('../utils/responser');
 
-const Poll = require('../services/polls');
+const Poll = require('../services/Polls');
 const pollService = new Poll();
 
 router.use(authenticate);
