@@ -1,0 +1,474 @@
+{
+	"info": {
+		"_postman_id": "275851dd-980d-4851-b6d8-d6b17ebf9bac",
+		"name": "Pollerize",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Polls",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/polls",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"polls"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/polls/2",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"polls",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/polls/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"polls",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userId\": 1,\n\t\"question\": \"Whos gonna win on election 2020?\",\n\t\"expiresAt\": 222\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/polls/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"polls",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/users",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/users/2",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/users/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"John Doe\",\n\t\"username\": \"john.doe\",\n\t\"password\": \"abcd\",\n\t\"gender\": \"male\",\n\t\"dob\": \"1990-06-15\",\n\t\"location\": \"iran/tehran\",\n\t\"active\": true\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/users/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign-in",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"john.doe\",\n\t\"password\": \"abcd\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/users/sign-in",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Votes",
+			"item": [
+				{
+					"name": "Poll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"voteId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/votes/poll",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"votes",
+								"poll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Votes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/votes",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"votes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"pollId\": 1,\n\t\"answer\": \"George Bush\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/votes",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"votes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Un-Poll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"voteId\": 2\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/votes/un-poll",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"votes",
+								"un-poll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Vote",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/votes/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"votes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
