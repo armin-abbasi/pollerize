@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const authService = require('../services/auth');
+const authService = require('../services/Auth');
 const { check, validationResult } = require('express-validator');
 const Response = require('../utils/responser');
 

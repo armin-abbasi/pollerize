@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const voteService = require('../services/votes');
+const voteService = require('../services/Votes');
 const { authenticate } = require('../middlewares/authentication');
 const { check, validationResult } = require('express-validator');
 const Response = require('../utils/responser');
