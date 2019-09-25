@@ -11,14 +11,12 @@ module.exports.authenticate = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
 
     try {
-        const user = JWT.verify(token, secret);
-        
         // Assign user info to request body
-        req.body.user = user;
-        
+        req.body.user = JWT.verify(token, secret);
+
         return next();
     } catch (err) {
         // Invalid token exception
         return Response.create(res, -3, err);
     }
-}
+};

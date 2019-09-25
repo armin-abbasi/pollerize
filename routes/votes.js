@@ -1,8 +1,10 @@
 const router = require('express').Router();
-const voteService = require('../services/Votes');
 const { authenticate } = require('../middlewares/authentication');
 const { check, validationResult } = require('express-validator');
 const Response = require('../utils/responser');
+
+const Vote = require('../services/Votes');
+const voteService = new Vote();
 
 router.use(authenticate);
 
