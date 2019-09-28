@@ -8,7 +8,30 @@ chai.use(chaiHttp);
 
 // API tests for polls service module.
 
+createUser = () => {
+    let user = {
+        "name": "John Doe",
+        "username": "john.doe",
+        "password": "abcd",
+        "gender": "male",
+        "dob": "1990-06-15",
+        "location": "iran/tehran",
+        "active": true
+    };
+
+    chai.request(app)
+        .post('/users')
+        .send(user)
+        .end((err, res) => {
+            if (err) throw err;
+            expect(res.status).to.be.equal(200);
+            expect(res.body.data.name).to.be.equal(user.name);
+            expect(res.body.data.username).to.be.equal(user.username);
+        });
+};
+
 getToken = (callback) => {
+    createUser();
     chai.request(app)
         .post('/users/sign-in')
         .send({
