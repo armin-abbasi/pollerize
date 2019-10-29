@@ -1,4 +1,5 @@
 const app = require('express')();
+const cors = require('cors');
 const config = require('./config/app');
 const pollRoutes = require('./routes/polls');
 const userRoutes = require('./routes/users');
@@ -7,6 +8,7 @@ const bodyParser = require('body-parser');
 const { check } = require('./middlewares/handler');
 const port = config.port || 3000;
 
+app.use(cors());
 app.use(bodyParser.json({ type: 'application/json' }));
 
 app.use('/polls', pollRoutes);

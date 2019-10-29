@@ -11,7 +11,7 @@ const signIn = (req, res) => {
         .findOne({where: {username: input.username}})
             .then(User => {
                 // Invalid username or password
-                if (User.validPassword(input.password) !== true) {
+                if (!User || User.validPassword(input.password) !== true) {
                     return Response.create(res, -5, []);
                 }
                 
